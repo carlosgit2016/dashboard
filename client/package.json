@@ -11,7 +11,9 @@
   "license": "ISC",
   "dependencies": {
     "angular": "^1.7.8",
+    "angular-chart.js": "^1.1.1",
     "angular-route": "^1.7.8",
+    "chart.js": "^2.8.0",
     "express": "^4.16.4",
     "tailwindcss": "^0.7.4"
   },
@@ -19,5 +21,8 @@
     "type": "git",
     "url": "https://github.com/carlosgit2016/dashboard"
   },
-  "homepage": "/"
+  "homepage": "/",
+  "devDependencies": {
+    "@fortawesome/fontawesome-free": "^5.8.1"
+  }
 }
