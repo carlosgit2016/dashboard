@@ -1,6 +1,6 @@
 package com.example.api.model;
 
-import java.time.LocalDate;
+import java.sql.Timestamp;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,6 +11,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.annotations.CreationTimestamp;
+
 @Entity
 @Table(name="pedido")
 public class Pedido {
@@ -19,14 +21,17 @@ public class Pedido {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id_pedido;
 	
+	@NotNull	
 	@ManyToOne
 	@JoinColumn(name = "id_veiculo")
 	private Veiculo veiculo;
 	
+	@NotNull	
 	@ManyToOne
 	@JoinColumn(name = "id_cliente")
 	private Cliente cliente;
 	
+	@NotNull	
 	@ManyToOne
 	@JoinColumn(name = "id_minerio")
 	private Minerio minerio;
@@ -35,10 +40,10 @@ public class Pedido {
 	private String destino;
 	
 	@NotNull	
-	private Double quantidade_kg;
+	private Double quantidade_kg;		
 	
-	@NotNull	
-	private LocalDate data_pedido;
+	@CreationTimestamp
+	private Timestamp data_pedido;
 	
 	public Long getId_pedido() {
 		return id_pedido;
@@ -77,10 +82,11 @@ public class Pedido {
 	public void setMinerio(Minerio minerio) {
 		this.minerio = minerio;
 	}
-	public LocalDate getData_pedido() {
+		
+	public Timestamp getData_pedido() {
 		return data_pedido;
 	}
-	public void setData_pedido(LocalDate data_pedido) {
+	public void setData_pedido(Timestamp data_pedido) {
 		this.data_pedido = data_pedido;
 	}
 	@Override

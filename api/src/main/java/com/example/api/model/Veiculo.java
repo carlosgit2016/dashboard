@@ -7,6 +7,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name="veiculo")
@@ -16,6 +17,7 @@ public class Veiculo {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id_veiculo;
 	
+	@NotNull	
 	@ManyToOne
 	@JoinColumn(name = "id_tipo_veiculo")
 	private TipoVeiculo tipoVeiculo;
@@ -27,7 +29,7 @@ public class Veiculo {
 	public void setId_veiculo(Long id_veiculo) {
 		this.id_veiculo = id_veiculo;
 	}
-		
+
 	public TipoVeiculo getTipoVeiculo() {
 		return tipoVeiculo;
 	}
