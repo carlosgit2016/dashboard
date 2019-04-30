@@ -6,15 +6,17 @@
   <script src="../node_modules/angular-route/angular-route.min.js"></script>
   <script src="./node_modules/chart.js/dist/Chart.min.js"></script>
   <script src="./node_modules/angular-chart.js/dist/angular-chart.min.js"></script>
-  <script src="main.js"></script>
+
   <link rel="stylesheet" href="./node_modules/tailwindcss/dist/tailwind.min.css">
   <link rel="stylesheet" href="./node_modules/@fortawesome/fontawesome-free/css/all.min.css">
   <link rel="stylesheet" href="./node_modules/chart.js/dist/Chart.min.css">
   <link rel="stylesheet" href="./node_modules/animate.css/animate.min.css">
   <link rel="stylesheet" href="css/imagehover.min.css">
+
   <title>
     DashBoard App
   </title>
+
 </head>
 
 <body ng-app="App">
@@ -24,7 +26,7 @@
         xmlns="http://www.w3.org/2000/svg">
         <path
           d="M13.5 22.1c1.8-7.2 6.3-10.8 13.5-10.8 10.8 0 12.15 8.1 17.55 9.45 3.6.9 6.75-.45 9.45-4.05-1.8 7.2-6.3 10.8-13.5 10.8-10.8 0-12.15-8.1-17.55-9.45-3.6-.9-6.75.45-9.45 4.05zM0 38.3c1.8-7.2 6.3-10.8 13.5-10.8 10.8 0 12.15 8.1 17.55 9.45 3.6.9 6.75-.45 9.45-4.05-1.8 7.2-6.3 10.8-13.5 10.8-10.8 0-12.15-8.1-17.55-9.45-3.6-.9-6.75.45-9.45 4.05z" />
-        </svg>
+      </svg>
       <span class="font-semibold text-xl tracking-tight ">DashBoard</span>
     </div>
     <div class="block lg:hidden">
@@ -53,6 +55,10 @@
   <div class="container mx-auto">
     <div ng-view></div>
   </div>
+  <script src="js/app.js"></script>
+  <script src="js/controller.js"></script>
+  <script src="js/components.js"></script>
+  <!-- <script src="js/service.js"></script> -->
 </body>
 
 </html>
