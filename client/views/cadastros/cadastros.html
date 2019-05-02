@@ -1,11 +1,12 @@
-<div class="flex flex-wrap">
+<div class="flex flex-wrap" ng-controller="CadastrosCtrl">
     <div class="max-w-xs m-4 rounded overflow-hidden shadow-lg cursor-pointer">
         <figure class="imghvr-push-up">
             <img class="w-full card-image" src="https://conceptodefinicion.de/wp-content/uploads/2015/02/Cliente-2.jpg"
                 alt="Sunset in the mountains">
             <figcaption class="text-center">
                 <button
-                    class="bg-transparent hover:bg-blue text-white font-semibold hover:text-white py-2 px-4 border border-blue hover:border-transparent rounded">
+                    class="bg-transparent hover:bg-blue text-white font-semibold hover:text-white py-2 px-4 border border-blue hover:border-transparent rounded"
+                    ng-click="onView('clientes')">
                     Visualizar Lista
                 </button>
             </figcaption>
@@ -53,7 +54,8 @@
                 alt="Sunset in the mountains">
             <figcaption class="text-center">
                 <button
-                    class="bg-transparent hover:bg-blue text-white font-semibold hover:text-white py-2 px-4 border border-blue hover:border-transparent rounded">
+                    class="bg-transparent hover:bg-blue text-white font-semibold hover:text-white py-2 px-4 border border-blue hover:border-transparent rounded"
+                    ng-click="onView('tiposDeVeiculos')">
                     Visualizar Lista
                 </button>
             </figcaption>

@@ -1,4 +1,4 @@
-var App = angular.module('App', ['ngRoute', 'chart.js','controllers','components']);
+var App = angular.module('App', ['ngRoute', 'chart.js','controllers','services']);
 
 App.config(function ($routeProvider) {
     $routeProvider
@@ -23,4 +23,4 @@ App.config(function ($routeProvider) {
         })
 });
 
-App.value('API', 'http://localhost:3000/');
+App.value('API', 'https://virtserver.swaggerhub.com/carlosgit2016/DashBoard/1.0.0/');

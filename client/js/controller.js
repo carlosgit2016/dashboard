@@ -1,11 +1,53 @@
 var App = angular.module('controllers', []);
 
-App.controller("ClienteCtrl", function ClienteCtrl() {
-    this.cliente = {
-        name: "Carlos"
+App.controller('CadastrosCtrl', function ($scope, $location, $route) {
+    $scope.onView = function (view) {
+        switch (view) {
+            case 'clientes':
+                $location.path('/cadastro/cliente')
+                break;
+            case 'tiposDeVeiculos':
+                $location.path('/cadastro/tipo-veiculo')
+                break;
+            default:
+                throw new Error('Problem, dont find path');
+        }
+    }
+});
+
+App.controller("ListClienteCtrl", function ($scope, $http, ClientesService, $routeParams, $location) {
+    $scope.clientes = [];
+    $scope.notFound = false;
+    ClientesService.list().then(function (data) {
+        $scope.clientes = data.data;
+        if ($scope.clientes.length === 0) {
+            $scope.notFound = true;
+        }
+    });
+
+    $scope.deletar = function (cliente) {
+        ClientesService.delete(cliente).then(function (data) {
+            $location.path('/clientes/list/delete-sucess');
+        })
     }
 })
 
+App.controller("ListTipoVeiculoCtrl", function($scope,TipoVeiculoService){
+    $scope.tipoDeVeiculos = [];
+    $scope.notFound = false;
+    TipoVeiculoService.list().then(function(data){
+        $scope.tipoDeVeiculos = data.data;
+        if($scope.tipoDeVeiculos.length === 0){
+            $scope.notFound = true;
+        }
+    })
+
+    $scope.deletar = function(tipoDeVeiculo){
+        TipoVeiculoService.delete(tipoDeVeiculo).then(function(data){
+            $location.path('/tipo-de-veiculo/list/delete-sucess');
+        })
+    }
+})
 
 App.controller("GraphCtrl", function ($scope) {
 
