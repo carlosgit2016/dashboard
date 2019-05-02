@@ -32,18 +32,35 @@ App.controller("ListClienteCtrl", function ($scope, $http, ClientesService, $rou
     }
 })
 
-App.controller("ListTipoVeiculoCtrl", function($scope,TipoVeiculoService){
-    $scope.tipoDeVeiculos = [];
+App.controller("MinerioCtrl", function ($scope, MinerioService) {
+    $scope.minerios = [];
     $scope.notFound = false;
-    TipoVeiculoService.list().then(function(data){
-        $scope.tipoDeVeiculos = data.data;
-        if($scope.tipoDeVeiculos.length === 0){
+    MinerioService.list().then(function (data) {
+        $scope.minerios = data.data;
+        if ($scope.minerios.length === 0) {
             $scope.notFound = true;
         }
     })
 
-    $scope.deletar = function(tipoDeVeiculo){
-        TipoVeiculoService.delete(tipoDeVeiculo).then(function(data){
+    $scope.deletar = function (minerio) {
+        TipoVeiculoService.delete(minerio).then(function (data) {
+            $location.path('/minerio/list/delete-sucess');
+        })
+    }
+})
+
+App.controller("ListTipoVeiculoCtrl", function ($scope, TipoVeiculoService) {
+    $scope.tipoDeVeiculos = [];
+    $scope.notFound = false;
+    TipoVeiculoService.list().then(function (data) {
+        $scope.tipoDeVeiculos = data.data;
+        if ($scope.tipoDeVeiculos.length === 0) {
+            $scope.notFound = true;
+        }
+    })
+
+    $scope.deletar = function (tipoDeVeiculo) {
+        TipoVeiculoService.delete(tipoDeVeiculo).then(function (data) {
             $location.path('/tipo-de-veiculo/list/delete-sucess');
         })
     }

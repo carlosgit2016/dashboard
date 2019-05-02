@@ -23,4 +23,4 @@ App.config(function ($routeProvider) {
         })
 });
 
-App.value('API', 'https://virtserver.swaggerhub.com/carlosgit2016/DashBoard/1.0.0/');
+App.value('API', 'http://localhost:8090/');
