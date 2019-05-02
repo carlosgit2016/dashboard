@@ -9,9 +9,13 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.CreationTimestamp;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
 @Entity
 @Table(name="pedido")
@@ -43,7 +47,11 @@ public class Pedido {
 	private Double quantidade_kg;		
 	
 	@CreationTimestamp
-	private Timestamp data_pedido;
+	private Timestamp data_pedido;	
+	
+	@Transient	
+	@JsonProperty(access = Access.READ_ONLY)
+	private Double total;
 	
 	public Long getId_pedido() {
 		return id_pedido;
@@ -88,6 +96,12 @@ public class Pedido {
 	}
 	public void setData_pedido(Timestamp data_pedido) {
 		this.data_pedido = data_pedido;
+	}	
+	public void setTotal() {
+		total = 0.0;
+	}
+	public Double getTotal() {
+		return this.quantidade_kg*this.minerio.getValor_grama()*1000;
 	}
 	@Override
 	public int hashCode() {

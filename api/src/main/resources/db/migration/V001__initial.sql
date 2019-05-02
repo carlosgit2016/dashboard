@@ -1,6 +1,6 @@
 CREATE TABLE minerio(
 	id_minerio BIGINT(20) PRIMARY KEY AUTO_INCREMENT,
-	nome varchar(20) NOT NULL,
+	nome varchar(60) NOT NULL,
 	valor_grama DECIMAL(10, 6) NOT NULL
 )engine=InnoDB default charset=utf8;
 

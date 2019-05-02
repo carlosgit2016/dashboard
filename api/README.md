@@ -4,15 +4,17 @@ Criado para alimentar um dashboard que relaciona veículos de transporte, carga,
 
   - Api Restful
   - Mysql e Hibernate
-  - Criação do banco: Migrator
+  - Criação do banco automaticamente: Flyway Migrator e Seeder
   - Validação com Hibernate, HandlerException e ValidationMessages.properties
 
 # Usar
 
-  - Só executar o Spring Boot, programado para rodar na porta 8090
+  - Abra o arquivo src/main/resources/application.properties para mudar a senha e o usuário do banco de dados
+  - Só executar o Spring Boot. Programado para rodar na porta 8090
+  - Banco de dados e tabelas serão criadas automaticamente
 
 Veja também, o Client:
-  - Neste repositório, na branch frontend, um SPA criado em Angular JS
+  - Neste repositório, na pasta client, há um SPA criado em Angular JS
 
 ### Rotas
 
@@ -37,6 +39,71 @@ Criado usando anotações do Hibernate. Caso algum campo sejá inválido, a api 
 ```
 
 Mostre o "msg_user" para o usuário final
+
+### Objetos JSON
+
+Pedido
+```sh
+{
+  "id_pedido": 17,
+  "veiculo": {
+      "id_veiculo": 19,
+      "tipoVeiculo": {
+          "id_tipo_veiculo": 4,
+          "nome": "Estrada"
+      }
+  },
+  "cliente": {
+      "id_cliente": 3,
+      "nome": "Pedreira Guaravera"
+  },
+  "minerio": {
+      "id_minerio": 10,
+      "nome": "Cátodo de cobre grado A",
+      "valor_grama": 785.135211
+  },
+  "destino": "SP/SP 101",
+  "quantidade_kg": 51,
+  "data_pedido": 1556806895000,
+  "total": 40041895.761
+}
+```
+
+Cliente
+```sh
+{
+  "id_cliente": 1,
+  "nome": "Daniel Junior"
+}
+```
+
+Minério
+```sh
+{
+  "id_minerio": 1,
+  "nome": "Ouro",
+  "valor_grama": 162.27082
+}
+```
+
+Tipo de veículo
+```sh
+{
+  "id_tipo_veiculo": 1,
+  "nome": "Ferrovia"
+}
+```
+
+Veículo
+```sh
+{
+  "id_veiculo": 1,
+  "tipoVeiculo": {
+      "id_tipo_veiculo": 1,
+      "nome": "Ferrovia"
+  }
+}
+```
 
 License
 ----

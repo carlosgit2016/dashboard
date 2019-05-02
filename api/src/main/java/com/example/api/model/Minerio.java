@@ -17,7 +17,7 @@ public class Minerio {
 	private Long id_minerio;
 	
 	@NotNull
-	@Size(min=3, max=20)
+	@Size(min=3, max=60)
 	private String nome;
 	
 	@NotNull
