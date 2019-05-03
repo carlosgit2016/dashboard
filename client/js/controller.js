@@ -4,10 +4,19 @@ App.controller('CadastrosCtrl', function ($scope, $location, $route) {
     $scope.onView = function (view) {
         switch (view) {
             case 'clientes':
-                $location.path('/cadastro/cliente')
+                $location.path('/cadastro/cliente');
                 break;
             case 'tiposDeVeiculos':
-                $location.path('/cadastro/tipo-veiculo')
+                $location.path('/cadastro/tipo-veiculo');
+                break;
+            case 'minerio':
+                $location.path('/cadastro/minerio');
+                break;
+            case 'pedidos':
+                $location.path('/cadastro/pedido');
+                break;
+            case 'veiculos':
+                $location.path('/cadastro/veiculo');
                 break;
             default:
                 throw new Error('Problem, dont find path');
@@ -36,6 +45,9 @@ App.controller("MinerioCtrl", function ($scope, MinerioService) {
     $scope.minerios = [];
     $scope.notFound = false;
     MinerioService.list().then(function (data) {
+        data.data.forEach(function (v) {
+            v.valor_grama = v.valor_grama.toFixed(2);
+        });
         $scope.minerios = data.data;
         if ($scope.minerios.length === 0) {
             $scope.notFound = true;
@@ -43,7 +55,7 @@ App.controller("MinerioCtrl", function ($scope, MinerioService) {
     })
 
     $scope.deletar = function (minerio) {
-        TipoVeiculoService.delete(minerio).then(function (data) {
+        MinerioService.delete(minerio).then(function (data) {
             $location.path('/minerio/list/delete-sucess');
         })
     }
@@ -64,7 +76,42 @@ App.controller("ListTipoVeiculoCtrl", function ($scope, TipoVeiculoService) {
             $location.path('/tipo-de-veiculo/list/delete-sucess');
         })
     }
-})
+});
+
+App.controller("PedidosCtrl", function ($scope, PedidoService) {
+    $scope.pedidos = [];
+    $scope.notFound = false;
+    PedidoService.list().then(function (data) {
+        $scope.pedidos = data.data;
+        if ($scope.pedidos.length === 0) {
+            $scope.notFound = true;
+        }
+    })
+
+    $scope.deletar = function (pedido) {
+        PedidoService.delete(pedido).then(function (data) {
+            $location.path('/tipo-de-veiculo/list/delete-sucess');
+        })
+    }
+});
+
+App.controller("VeiculosCtrl", function ($scope, VeiculoService) {
+    $scope.veiculos = [];
+    $scope.notFound = false;
+    VeiculoService.list().then(function (data) {
+        $scope.veiculos = data.data;
+        if ($scope.veiculos.length === 0) {
+            $scope.notFound = true;
+        }
+    })
+
+    $scope.deletar = function (veiculo) {
+        VeiculoService.delete(veiculo).then(function (data) {
+            $location.path('/tipo-de-veiculo/list/delete-sucess');
+        })
+    }
+});
+
 
 App.controller("GraphCtrl", function ($scope) {
 
