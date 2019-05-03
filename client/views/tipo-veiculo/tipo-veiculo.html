@@ -1,1 +1,28 @@
-<h1>Tipo de Veiculo Tela</h1>
+<div class="w-2/3 mx-auto" ng-show="tipoDeVeiculos.length > 0" ng-controller="ListTipoVeiculoCtrl">
+    <div class="bg-white shadow-md rounded my-6">
+        <table class="text-left w-full border-collapse">
+            <!--Border collapse doesn't work on this site yet but it's available in newer tailwind versions -->
+            <thead>
+                <tr>
+                    <th
+                        class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">
+                        Nome</th>
+                    <th
+                        class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">
+                        Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="tipoDeveiculo in tipoDeVeiculos" class="hover:bg-grey-lighter">
+                    <td class="py-4 px-6 border-b border-grey-light">{{ tipoDeveiculo.nome }}</td>
+                    <td class="py-4 px-6 border-b border-grey-light">
+                        <a href="#"
+                            class="text-grey-lighter font-bold py-1 px-3 rounded text-xs bg-green hover:bg-green-dark">Editar</a>
+                        <a href="#"
+                            class="text-grey-lighter font-bold py-1 px-3 rounded text-xs bg-red hover:bg-red-dark">Deletar</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
