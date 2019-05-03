@@ -1,0 +1,1 @@
+var AppComponent = angular.module('components', []);
