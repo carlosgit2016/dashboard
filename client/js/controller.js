@@ -24,7 +24,7 @@ App.controller('CadastrosCtrl', function ($scope, $location, $route) {
     }
 });
 
-App.controller("ListClienteCtrl", function ($scope, $http, ClientesService, $routeParams, $location) {
+App.controller("ListClienteCtrl", function ($scope, ClientesService,PassDataBeteewenPages , $location) {
     $scope.clientes = [];
     $scope.notFound = false;
     ClientesService.list().then(function (data) {
@@ -33,6 +33,10 @@ App.controller("ListClienteCtrl", function ($scope, $http, ClientesService, $rou
             $scope.notFound = true;
         }
     });
+    $scope.editar = function(cliente){
+        PassDataBeteewenPages.set(cliente);
+        $location.path('/cliente/controlar')
+    }
 
     $scope.deletar = function (cliente) {
         ClientesService.delete(cliente).then(function (data) {
@@ -41,7 +45,7 @@ App.controller("ListClienteCtrl", function ($scope, $http, ClientesService, $rou
     }
 })
 
-App.controller("MinerioCtrl", function ($scope, MinerioService) {
+App.controller("MinerioCtrl", function ($scope, MinerioService, PassDataBeteewenPages, $location) {
     $scope.minerios = [];
     $scope.notFound = false;
     MinerioService.list().then(function (data) {
@@ -53,6 +57,11 @@ App.controller("MinerioCtrl", function ($scope, MinerioService) {
             $scope.notFound = true;
         }
     })
+
+    $scope.editar = function(minerio){
+        PassDataBeteewenPages.set(minerio);
+        $location.path('/minerio/controlar')
+    }
 
     $scope.deletar = function (minerio) {
         MinerioService.delete(minerio).then(function (data) {

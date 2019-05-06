@@ -18,9 +18,9 @@
             <tbody>
                 <tr ng-repeat="minerio in minerios" class="hover:bg-grey-lighter">
                     <td class="py-4 px-6 border-b border-grey-light">{{ minerio.nome }}</td>
-                    <td class="py-4 px-6 border-b border-grey-light">{{ minerio.valor_grama }}</td>
+                    <td class="py-4 px-6 border-b border-grey-light">R$ {{ minerio.valor_grama }}</td>
                     <td class="py-4 px-6 border-b border-grey-light">
-                        <a href="#"
+                        <a ng-click="editar(minerio)" 
                             class="text-grey-lighter font-bold py-1 px-3 rounded text-xs bg-green hover:bg-green-dark">Editar</a>
                         <a href="#"
                             class="text-grey-lighter font-bold py-1 px-3 rounded text-xs bg-red hover:bg-red-dark">Delete</a>

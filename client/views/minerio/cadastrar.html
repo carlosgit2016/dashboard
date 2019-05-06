@@ -1,0 +1,35 @@
+<form ng-show="$ctrl.entity" class="w-full max-w-md">
+    <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-last-name">
+        Nome
+    </label>
+    <input
+        class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-grey"
+        ng-model="minerio.nome" type="text"
+        placeholder="{{$ctrl.hasAndIsValideEntity() ? $ctrl.entity.nome : 'Digite seu nome'}}" required>
+    <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-last-name">
+        Valor Da Grama
+    </label>
+    <input
+        class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-grey"
+        ng-model="minerio.valor_grama" type="number"
+        placeholder="{{$ctrl.hasAndIsValideEntity() ? $ctrl.entity.valor_grama : 'Digite o valor da grama'}}" required>
+    <div class="flex m-4 content-between">
+        <button type="submit" class="bg-blue hover:bg-blue-dark text-white font-bold py-2 px-4 rounded-full"
+            ng-click="$ctrl.salvar(minerio)">
+            {{ $ctrl.hasAndIsValideEntity() ? 'Salvar' : 'Cadastrar' }}
+        </button>
+        <button type="button" class="bg-blue hover:bg-blue-dark text-white font-bold ml-4 py-2 px-4 rounded-full"
+            ng-click="$ctrl.cancelar()">
+            Voltar
+        </button>
+    </div>
+</form>
+
+<div ng-show="!$ctrl.entity" role="alert">
+    <div class="bg-red text-white font-bold rounded-t px-4 py-2">
+        Erro
+    </div>
+    <div class="border border-t-0 border-red-light rounded-b bg-red-lightest px-4 py-3 text-red-dark">
+        <p>Volte a lista e selecione uma entidade.</p>
+    </div>
+</div>

@@ -20,6 +20,8 @@ App.config(function ($routeProvider) {
             templateUrl: 'views/veiculo/veiculo.html'
         }).when('/cadastros', {
             templateUrl: 'views/cadastros/cadastros.html'
+        }).when('/clientes',{
+            templateUrl: 'views/cliente/cadastrar.html'
         })
 });
 
