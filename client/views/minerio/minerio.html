@@ -1,5 +1,11 @@
 <div class="w-2/3 mx-auto" ng-show="minerios.length > 0" ng-controller="MinerioCtrl">
     <div class="bg-white shadow-md rounded my-6">
+        <div class="flex flex-col items-end">
+            <button ng-click="adicionar()"
+                class="fixed bg-blue-light hover:bg-blue text-white font-bold py-2 px-4 rounded inline-flex items-center">
+                <i class="material-icons">add_circle_outline</i>
+            </button>
+        </div>
         <table class="text-left w-full border-collapse">
             <!--Border collapse doesn't work on this site yet but it's available in newer tailwind versions -->
             <thead>
@@ -20,10 +26,8 @@
                     <td class="py-4 px-6 border-b border-grey-light">{{ minerio.nome }}</td>
                     <td class="py-4 px-6 border-b border-grey-light">R$ {{ minerio.valor_grama }}</td>
                     <td class="py-4 px-6 border-b border-grey-light">
-                        <a ng-click="editar(minerio)" 
-                            class="text-grey-lighter font-bold py-1 px-3 rounded text-xs bg-green hover:bg-green-dark">Editar</a>
-                        <a href="#"
-                            class="text-grey-lighter font-bold py-1 px-3 rounded text-xs bg-red hover:bg-red-dark">Delete</a>
+                        <a ng-click="editar(minerio)"
+                            class="cursor-pointer text-grey-lighter font-bold py-1 px-3 rounded text-xs bg-green hover:bg-green-dark">Editar</a>
                     </td>
                 </tr>
             </tbody>

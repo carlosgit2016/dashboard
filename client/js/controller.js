@@ -33,6 +33,11 @@ App.controller("ListClienteCtrl", function ($scope, ClientesService, PassDataBet
             $scope.notFound = true;
         }
     });
+
+    $scope.adicionar = function () {
+        $location.path('/cliente/controlar');
+    }
+
     $scope.editar = function (cliente) {
         PassDataBeteewenPages.set(cliente);
         $location.path('/cliente/controlar')
@@ -58,6 +63,10 @@ App.controller("MinerioCtrl", function ($scope, MinerioService, PassDataBeteewen
         }
     })
 
+    $scope.adicionar = function () {
+        $location.path('/minerio/controlar');
+    }
+
     $scope.editar = function (minerio) {
         PassDataBeteewenPages.set(minerio);
         $location.path('/minerio/controlar')
@@ -80,6 +89,15 @@ App.controller("ListTipoVeiculoCtrl", function ($scope, TipoVeiculoService, Pass
         }
     })
 
+    $scope.adicionar = function () {
+        $location.path('/tipo-veiculos/controlar');
+    }
+
+    $scope.editar = function (tipoDeVeiculo) {
+        PassDataBeteewenPages.set(tipoDeVeiculo);
+        $location.path('/tipo-veiculos/controlar')
+    }
+
     $scope.deletar = function (tipoDeVeiculo) {
         TipoVeiculoService.delete(tipoDeVeiculo).then(function (data) {
             $location.path('/tipo-de-veiculo/list/delete-sucess');
@@ -97,6 +115,10 @@ App.controller("PedidosCtrl", function ($scope, PedidoService, PassDataBeteewenP
         }
     })
 
+    $scope.adicionar = function () {
+        $location.path('/pedido/controlar');
+    }
+
     $scope.editar = function (minerio) {
         PassDataBeteewenPages.set(minerio);
         $location.path('/pedido/controlar')
@@ -104,7 +126,11 @@ App.controller("PedidosCtrl", function ($scope, PedidoService, PassDataBeteewenP
 
     $scope.deletar = function (pedido) {
         PedidoService.delete(pedido).then(function (data) {
-            $location.path('/tipo-de-veiculo/list/delete-sucess');
+            var indexElement = $scope.pedidos.findIndex(function (e) {
+                return e.id_pedido === pedido.id_pedido;
+            })
+            $scope.pedidos.splice(indexElement, 1);
+            alert('Deletado com sucesso');
         })
     }
 });
@@ -119,24 +145,53 @@ App.controller("VeiculosCtrl", function ($scope, VeiculoService, PassDataBeteewe
         }
     })
 
+    $scope.adicionar = function () {
+        $location.path('/veiculo/controlar');
+    }
+
+    $scope.editar = function (veiculo) {
+        PassDataBeteewenPages.set(veiculo);
+        $location.path('/veiculo/controlar')
+    }
+
     $scope.deletar = function (veiculo) {
         VeiculoService.delete(veiculo).then(function (data) {
-            $location.path('/tipo-de-veiculo/list/delete-sucess');
+            alert('deletado com sucesso');
         })
     }
 });
 
+App.controller("GraphCtrl", function ($scope, VeiculoService) {
+    //Quantidade de Veiculo por tipo
+    VeiculoService.list().then(function (data) {
+        var veiculos = data.data;
+        var tiposDeVeiculos = [];
+        var graphObject = {
+            labels: [],
+            data: []
+        };
+        veiculos.forEach(function (veiculo) {
+            var existElement = tiposDeVeiculos.find(function (tipoDeVeiculo) {
+                return tipoDeVeiculo.id_tipo_veiculo === veiculo.tipoVeiculo.id_tipo_veiculo;
+            });
+            if (!existElement) tiposDeVeiculos.push(veiculo.tipoVeiculo);
+        })
 
-App.controller("GraphCtrl", function ($scope) {
+        graphObject.labels = tiposDeVeiculos.map(function (tipoDeVeiculo) {
+            return tipoDeVeiculo.nome;
+        });
 
-    $scope.labels = ["Ouro", "Prata", "Talco", "Gipsita", "Fluorita", "Apatita", "Apatita", "Quartzo", "Quartzo"];
-    $scope.series = ['Janeiro', 'Fevereiro', 'Março'];
-    $scope.data = [
-        [65, 59, 80, 81, 56, 55, 40],
-        [50, 40, 30, 90, 15, 75, 98],
-        [17, 45, 23, 11, 30, 20, 58]
-    ];
-    $scope.onClick = function (points, evt) {
-        console.log(points, evt);
-    };
+        tiposDeVeiculos.forEach(function (tipoDeVeiculo) {
+            graphObject.data.push(veiculos.filter(function (veiculo) {
+                return veiculo.tipoVeiculo.id_tipo_veiculo === tipoDeVeiculo.id_tipo_veiculo;
+            }).length)
+        });
+
+        $scope.labels = graphObject.labels;
+        $scope.series = ['Carro'];
+        $scope.data = [graphObject.data];
+
+
+    })
+
 });

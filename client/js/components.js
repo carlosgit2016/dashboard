@@ -25,8 +25,6 @@ function DefaultController(PassDataBeteewenPages, $location, DefaultService) {
         }
     }
 
-
-
     $ctrl.salvar = function (_entity) {
         if (isValideObjectAndIsEditOption($ctrl.entity)) { //Editando
             serialize($ctrl.entity, _entity);
@@ -66,6 +64,37 @@ function isValideObjectAndIsEditOption(obj) {
     return valideObject(obj) && isEditOption(obj);
 }
 
+App.filter('capitalize', function () {
+    return function (input) {
+        return (!!input) ? input.charAt(0).toUpperCase() + input.substr(1).toLowerCase() : '';
+    }
+});
+
+App.component('dropdown', {
+    templateUrl: '../views/dropdown/dropdown.html',
+    bindings: {
+        path: '@',
+        onSelect: '&'
+    },
+    controller: function (DefaultService) {
+        var $ctrl = this;
+
+        $ctrl.$onInit = function () {
+            $ctrl.items = [];
+            DefaultService.list($ctrl.path).then(function (data) {
+                $ctrl.items = data.data;
+            });
+
+        }
+
+        $ctrl.hasChanged = function (change) {
+            console.log(change);
+            $ctrl.onSelect({ change });
+        }
+
+    }
+})
+
 //Controle de Cliente
 App.component('controlarCliente', {
     templateUrl: '../views/cliente/cadastrar.html',
@@ -100,6 +129,27 @@ App.component('controlarPedido', {
     controller: DefaultController
 });
 
+//Controle de Tipo de Veiculo
+App.component('controlarTipoDeVeiculo', {
+    templateUrl: '../views/tipo-veiculo/cadastrar.html',
+    bindings: {
+        backpath: '<',
+        path: '@',
+        idEntity: '@'
+    },
+    controller: DefaultController
+});
+
+//Controle Veiculo
+App.component('controlarVeiculo', {
+    templateUrl: '../views/veiculo/cadastrar.html',
+    bindings: {
+        backpath: '<',
+        path: '@',
+        idEntity: '@'
+    },
+    controller: DefaultController
+});
 
 AppComponent.config(function ($routeProvider) {
     $routeProvider.when('/cliente/controlar', {
@@ -108,5 +158,9 @@ AppComponent.config(function ($routeProvider) {
         template: '<controlar-minerio id-entity="id_minerio" path="minerios" backpath="\'/cadastro/minerio\'" class="flex justify-center m-16" ></controlar-minerio>'
     }).when('/pedido/controlar', {
         template: '<controlar-pedido id-entity="id_pedido" path="pedidos" backpath="\'/cadastro/pedido\'" class="flex justify-center m-16" ></controlar-pedido>'
+    }).when('/tipo-veiculos/controlar', {
+        template: '<controlar-tipo-de-veiculo id-entity="id_tipo_veiculo" path="tipo-veiculos" backpath="\'/cadastro/tipo-veiculo\'" class="flex justify-center m-16" ></controlar-tipo-de-veiculo>'
+    }).when('/veiculo/controlar', {
+        template: '<controlar-veiculo id-entity="id_veiculo" path="veiculos" backpath="\'/cadastro/veiculo\'" class="flex justify-center m-16" ></controlar-veiculo>'
     });
 });

@@ -8,7 +8,7 @@ AppService.service('DefaultService', function ($http, API) {
         create: function (entity, path) {
             return $http.post(API + path, entity)
         },
-        update: function (entity, path,id_entity) {
+        update: function (entity, path, id_entity) {
             return $http.put(API + path + '/' + entity[id_entity], entity)
         },
         delete: function (entity, path) {
@@ -29,7 +29,7 @@ AppService.service('ClientesService', function ($http, API) {
             return $http.put(API + 'clientes/' + cliente.id_cliente, cliente)
         },
         delete: function (cliente) {
-            return $http.delete(API + 'clientes', cliente)
+            return $http.delete(API + 'clientes/' + cliente.id_cliente, cliente)
         }
     }
 });
@@ -97,7 +97,7 @@ App.service('PedidoService', function ($http, API) {
             return $http.put(API + 'pedidos', pedido)
         },
         delete: function (pedido) {
-            return $http.delete(API + 'pedidos', pedido)
+            return $http.delete(API + 'pedidos/' + pedido.id_pedido)
         }
     }
 })

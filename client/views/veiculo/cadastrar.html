@@ -1,0 +1,21 @@
+<form ng-show="$ctrl.entity" class="w-full max-w-md">
+    <dropdown ng-model="veiculo.tipoVeiculo" on-select="veiculo.tipoVeiculo = change" path="tipo-veiculos"></dropdown>
+    <div class="flex m-4 content-between">
+        <button type="submit" class="bg-blue hover:bg-blue-dark text-white font-bold py-2 px-4 rounded-full"
+            ng-click="$ctrl.salvar(veiculo)">
+            {{ $ctrl.hasAndIsValideEntity() ? 'Salvar' : 'Cadastrar' }}
+        </button>
+        <button type="button" class="bg-blue hover:bg-blue-dark text-white font-bold ml-4 py-2 px-4 rounded-full"
+            ng-click="$ctrl.cancelar()">
+            Voltar
+        </button>
+    </div>
+</form>
+<div ng-show="!$ctrl.entity" role="alert">
+    <div class="bg-red text-white font-bold rounded-t px-4 py-2">
+        Erro
+    </div>
+    <div class="border border-t-0 border-red-light rounded-b bg-red-lightest px-4 py-3 text-red-dark">
+        <p>Volte a lista e selecione uma entidade.</p>
+    </div>
+</div>

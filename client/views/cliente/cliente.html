@@ -1,5 +1,12 @@
 <div class="w-2/3 mx-auto" ng-show="clientes.length > 0" ng-controller="ListClienteCtrl">
     <div class="bg-white shadow-md rounded my-6">
+        <div class="flex flex-col items-end">
+            <button ng-click="adicionar()"
+                class="fixed bg-blue-light hover:bg-blue text-white font-bold py-2 px-4 rounded inline-flex items-center">
+                <i class="material-icons">add_circle_outline</i>
+                <span>Adicionar</span>
+            </button>
+        </div>
         <table class="text-left w-full border-collapse">
             <!--Border collapse doesn't work on this site yet but it's available in newer tailwind versions -->
             <thead>
@@ -16,10 +23,8 @@
                 <tr ng-repeat="cliente in clientes" class="hover:bg-grey-lighter">
                     <td class="py-4 px-6 border-b border-grey-light">{{ cliente.nome }}</td>
                     <td class="py-4 px-6 border-b border-grey-light">
-                        <a 
-                            class="text-grey-lighter font-bold py-1 px-3 rounded text-xs bg-green hover:bg-green-dark" ng-click="editar(cliente)" >Editar</a>
-                        <a href="#"
-                            class="text-grey-lighter font-bold py-1 px-3 rounded text-xs bg-red hover:bg-red-dark">Delete</a>
+                        <a class="text-grey-lighter font-bold py-1 px-3 rounded text-xs bg-green hover:bg-green-dark cursor-pointer"
+                            ng-click="editar(cliente)">Editar</a>
                     </td>
                 </tr>
             </tbody>
