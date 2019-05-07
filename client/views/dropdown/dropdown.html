@@ -1,0 +1,8 @@
+<div class="flex flex-col">
+    <label class="mt-2 mb-2 block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-last-name">
+        Selecione o {{ $ctrl.path | capitalize }}
+    </label>
+    <select class="mt-2 mb-2 bg-grey-lighter rounded" ng-model="selected" ng-change="$ctrl.hasChanged(selected)"
+            ng-options="item.nome ? item.nome : item.id_veiculo for item in $ctrl.items track by item.nome">
+    </select>
+</div>

@@ -1,4 +1,4 @@
-var App = angular.module('App', ['ngRoute', 'chart.js','controllers','services']);
+var App = angular.module('App', ['ngRoute', 'chart.js','controllers','services','components']);
 
 App.config(function ($routeProvider) {
     $routeProvider
@@ -20,6 +20,8 @@ App.config(function ($routeProvider) {
             templateUrl: 'views/veiculo/veiculo.html'
         }).when('/cadastros', {
             templateUrl: 'views/cadastros/cadastros.html'
+        }).when('/clientes',{
+            templateUrl: 'views/cliente/cadastrar.html'
         })
 });
 

@@ -1,5 +1,22 @@
 var AppService = angular.module('services', []);
 
+AppService.service('DefaultService', function ($http, API) {
+    return {
+        list: function (path) {
+            return $http.get(API + path)
+        },
+        create: function (entity, path) {
+            return $http.post(API + path, entity)
+        },
+        update: function (entity, path, id_entity) {
+            return $http.put(API + path + '/' + entity[id_entity], entity)
+        },
+        delete: function (entity, path) {
+            return $http.delete(API + path, entity)
+        }
+    }
+});
+
 AppService.service('ClientesService', function ($http, API) {
     return {
         list: function () {
@@ -9,10 +26,10 @@ AppService.service('ClientesService', function ($http, API) {
             return $http.post(API + 'clientes', cliente)
         },
         update: function (cliente) {
-            return $http.put(API + 'clientes', cliente)
+            return $http.put(API + 'clientes/' + cliente.id_cliente, cliente)
         },
         delete: function (cliente) {
-            return $http.delete(API + 'clientes', cliente)
+            return $http.delete(API + 'clientes/' + cliente.id_cliente, cliente)
         }
     }
 });
@@ -80,7 +97,22 @@ App.service('PedidoService', function ($http, API) {
             return $http.put(API + 'pedidos', pedido)
         },
         delete: function (pedido) {
-            return $http.delete(API + 'pedidos', pedido)
+            return $http.delete(API + 'pedidos/' + pedido.id_pedido)
         }
     }
 })
+
+App.factory('PassDataBeteewenPages', function () {
+    var savedData = {}
+    function set(data) {
+        savedData = data;
+    }
+    function get() {
+        return savedData;
+    }
+
+    return {
+        set: set,
+        get: get
+    }
+});
