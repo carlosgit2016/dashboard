@@ -89,10 +89,24 @@ App.component('controlarMinerio', {
     controller: DefaultController
 });
 
+//Controle de Pedido
+App.component('controlarPedido', {
+    templateUrl: '../views/pedido/cadastrar.html',
+    bindings: {
+        backpath: '<',
+        path: '@',
+        idEntity: '@'
+    },
+    controller: DefaultController
+});
+
+
 AppComponent.config(function ($routeProvider) {
     $routeProvider.when('/cliente/controlar', {
         template: '<controlar-cliente id-entity="id_cliente" path="clientes" backpath="\'/cadastro/cliente\'" class="flex justify-center m-16" ></controlar-cliente>'
-    }).when('/minerio/controlar',{
+    }).when('/minerio/controlar', {
         template: '<controlar-minerio id-entity="id_minerio" path="minerios" backpath="\'/cadastro/minerio\'" class="flex justify-center m-16" ></controlar-minerio>'
+    }).when('/pedido/controlar', {
+        template: '<controlar-pedido id-entity="id_pedido" path="pedidos" backpath="\'/cadastro/pedido\'" class="flex justify-center m-16" ></controlar-pedido>'
     });
 });

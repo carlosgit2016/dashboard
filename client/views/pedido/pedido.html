@@ -32,8 +32,8 @@
                     <td class="py-4 px-6 border-b border-grey-light">{{ pedido.quantidade_kg }}</td>
                     <td class="py-4 px-6 border-b border-grey-light">{{ pedido.data_pedido | date : 'dd/MM/yyyy' }}</td>
                     <td class="py-4 px-6 border-b border-grey-light">
-                        <a href="#"
-                            class="text-grey-lighter font-bold py-1 px-3 rounded text-xs bg-green hover:bg-green-dark">Editar</a>
+                        <a ng-click="editar(pedido)"
+                            class="text-grey-lighter font-bold py-1 px-3 rounded text-xs bg-green hover:bg-green-dark cursor-pointer">Editar</a>
                         <a href="#"
                             class="text-grey-lighter font-bold py-1 px-3 rounded text-xs bg-red hover:bg-red-dark">Deletar</a>
                     </td>

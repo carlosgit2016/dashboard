@@ -24,7 +24,7 @@ App.controller('CadastrosCtrl', function ($scope, $location, $route) {
     }
 });
 
-App.controller("ListClienteCtrl", function ($scope, ClientesService,PassDataBeteewenPages , $location) {
+App.controller("ListClienteCtrl", function ($scope, ClientesService, PassDataBeteewenPages, $location) {
     $scope.clientes = [];
     $scope.notFound = false;
     ClientesService.list().then(function (data) {
@@ -33,7 +33,7 @@ App.controller("ListClienteCtrl", function ($scope, ClientesService,PassDataBete
             $scope.notFound = true;
         }
     });
-    $scope.editar = function(cliente){
+    $scope.editar = function (cliente) {
         PassDataBeteewenPages.set(cliente);
         $location.path('/cliente/controlar')
     }
@@ -58,7 +58,7 @@ App.controller("MinerioCtrl", function ($scope, MinerioService, PassDataBeteewen
         }
     })
 
-    $scope.editar = function(minerio){
+    $scope.editar = function (minerio) {
         PassDataBeteewenPages.set(minerio);
         $location.path('/minerio/controlar')
     }
@@ -70,7 +70,7 @@ App.controller("MinerioCtrl", function ($scope, MinerioService, PassDataBeteewen
     }
 })
 
-App.controller("ListTipoVeiculoCtrl", function ($scope, TipoVeiculoService) {
+App.controller("ListTipoVeiculoCtrl", function ($scope, TipoVeiculoService, PassDataBeteewenPages, $location) {
     $scope.tipoDeVeiculos = [];
     $scope.notFound = false;
     TipoVeiculoService.list().then(function (data) {
@@ -87,7 +87,7 @@ App.controller("ListTipoVeiculoCtrl", function ($scope, TipoVeiculoService) {
     }
 });
 
-App.controller("PedidosCtrl", function ($scope, PedidoService) {
+App.controller("PedidosCtrl", function ($scope, PedidoService, PassDataBeteewenPages, $location) {
     $scope.pedidos = [];
     $scope.notFound = false;
     PedidoService.list().then(function (data) {
@@ -97,6 +97,11 @@ App.controller("PedidosCtrl", function ($scope, PedidoService) {
         }
     })
 
+    $scope.editar = function (minerio) {
+        PassDataBeteewenPages.set(minerio);
+        $location.path('/pedido/controlar')
+    }
+
     $scope.deletar = function (pedido) {
         PedidoService.delete(pedido).then(function (data) {
             $location.path('/tipo-de-veiculo/list/delete-sucess');
@@ -104,7 +109,7 @@ App.controller("PedidosCtrl", function ($scope, PedidoService) {
     }
 });
 
-App.controller("VeiculosCtrl", function ($scope, VeiculoService) {
+App.controller("VeiculosCtrl", function ($scope, VeiculoService, PassDataBeteewenPages, $location) {
     $scope.veiculos = [];
     $scope.notFound = false;
     VeiculoService.list().then(function (data) {
