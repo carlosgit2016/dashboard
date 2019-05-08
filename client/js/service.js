@@ -107,12 +107,18 @@ App.factory('PassDataBeteewenPages', function () {
     function set(data) {
         savedData = data;
     }
+
+    function clear(){
+        savedData = {};
+    }
+
     function get() {
         return savedData;
     }
 
     return {
         set: set,
-        get: get
+        get: get,
+        clear: clear
     }
 });

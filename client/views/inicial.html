@@ -1,11 +1,36 @@
 <!-- Graphics -->
 <div class="flex flex-wrap justify-center" ng-controller="GraphCtrl">
-    <div class="w-3/5 m-4 rounded overflow-hidden shadow-lg">
+    <div class="w-3/4 m-4 rounded overflow-hidden shadow-lg">
         <div class="container m-4 text-left">
             <div class="font-bold text-base">Quantidade de veiculos por tipo</div>
         </div>
-        <canvas class="chart chart-bar" chart-data="data" chart-labels="labels" chart-series="series"
-            chart-options="options" chart-dataset-override="datasetOverride" chart-click="onClick">
-        </canvas>
+        <div ng-if="veiculo.ready">
+            <canvas class="chart chart-bar" chart-data="veiculo.data" chart-labels="veiculo.labels"
+                chart-series="veiculo.series" chart-options="options" chart-dataset-override="datasetOverride">
+            </canvas>
+        </div>
     </div>
+
+    <div class="w-3/4 m-4 rounded overflow-hidden shadow-lg">
+        <div class="container m-4 text-left">
+            <div class="font-bold text-base">Quantidade de minerio por tipo</div>
+        </div>
+        <div ng-if="minerio.ready">
+            <canvas class="chart chart-bar" chart-data="minerio.data" chart-labels="minerio.labels"
+                chart-series="minerio.series" chart-options="options" chart-dataset-override="datasetOverride">
+            </canvas>
+        </div>
+    </div>
+
+    <div class="w-3/4 m-4 rounded overflow-hidden shadow-lg">
+        <div class="container m-4 text-left">
+            <div class="font-bold text-base">Quandidade de Pedidos por cliente</div>
+        </div>
+        <div ng-if="cliente.ready">
+            <canvas class="chart chart-bar" chart-data="cliente.data" chart-labels="cliente.labels"
+                chart-series="cliente.series" chart-options="options" chart-dataset-override="datasetOverride">
+            </canvas>
+        </div>
+    </div>
+
 </div>
