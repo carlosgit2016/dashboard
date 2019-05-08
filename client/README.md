@@ -9,13 +9,13 @@ cd dashboard/client
 python -m http.server
 
 ### CRUD'
-Controle de Cliente
-Controle de Minerio
-Controle de Veiculo
-Controle de Tipo de Veiculo
-Controle de Pedido
+ - Controle de Cliente
+ - Controle de Minerio
+ - Controle de Veiculo
+ - Controle de Tipo de Veiculo
+ - Controle de Pedido
 
 ### Graphs
-Quantidade de Veiculos por tipo
-Quantidade de Minerio por tipo
-Quandidade de Pedidos por cliente
+ - Quantidade de Veiculos por tipo
+ - Quantidade de Minerio por tipo
+ - Quandidade de Pedidos por cliente
