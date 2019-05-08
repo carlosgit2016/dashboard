@@ -36,6 +36,7 @@ App.controller("ListClienteCtrl", function ($scope, ClientesService, PassDataBet
 
     $scope.adicionar = function () {
         $location.path('/cliente/controlar');
+        PassDataBeteewenPages.clear();
     }
 
     $scope.editar = function (cliente) {
@@ -65,6 +66,7 @@ App.controller("MinerioCtrl", function ($scope, MinerioService, PassDataBeteewen
 
     $scope.adicionar = function () {
         $location.path('/minerio/controlar');
+        PassDataBeteewenPages.clear();
     }
 
     $scope.editar = function (minerio) {
@@ -91,6 +93,7 @@ App.controller("ListTipoVeiculoCtrl", function ($scope, TipoVeiculoService, Pass
 
     $scope.adicionar = function () {
         $location.path('/tipo-veiculos/controlar');
+        PassDataBeteewenPages.clear();
     }
 
     $scope.editar = function (tipoDeVeiculo) {
@@ -117,6 +120,7 @@ App.controller("PedidosCtrl", function ($scope, PedidoService, PassDataBeteewenP
 
     $scope.adicionar = function () {
         $location.path('/pedido/controlar');
+        PassDataBeteewenPages.clear();
     }
 
     $scope.editar = function (minerio) {
@@ -147,6 +151,7 @@ App.controller("VeiculosCtrl", function ($scope, VeiculoService, PassDataBeteewe
 
     $scope.adicionar = function () {
         $location.path('/veiculo/controlar');
+        PassDataBeteewenPages.clear();
     }
 
     $scope.editar = function (veiculo) {
@@ -161,15 +166,11 @@ App.controller("VeiculosCtrl", function ($scope, VeiculoService, PassDataBeteewe
     }
 });
 
-App.controller("GraphCtrl", function ($scope, VeiculoService) {
+App.controller("GraphCtrl", function ($scope, VeiculoService, PedidoService, $rootScope) {
     //Quantidade de Veiculo por tipo
     VeiculoService.list().then(function (data) {
         var veiculos = data.data;
         var tiposDeVeiculos = [];
-        var graphObject = {
-            labels: [],
-            data: []
-        };
         veiculos.forEach(function (veiculo) {
             var existElement = tiposDeVeiculos.find(function (tipoDeVeiculo) {
                 return tipoDeVeiculo.id_tipo_veiculo === veiculo.tipoVeiculo.id_tipo_veiculo;
@@ -177,21 +178,70 @@ App.controller("GraphCtrl", function ($scope, VeiculoService) {
             if (!existElement) tiposDeVeiculos.push(veiculo.tipoVeiculo);
         })
 
-        graphObject.labels = tiposDeVeiculos.map(function (tipoDeVeiculo) {
+        var labels = tiposDeVeiculos.map(function (tipoDeVeiculo) {
             return tipoDeVeiculo.nome;
         });
 
+        var data = [];
         tiposDeVeiculos.forEach(function (tipoDeVeiculo) {
-            graphObject.data.push(veiculos.filter(function (veiculo) {
+            data.push(veiculos.filter(function (veiculo) {
                 return veiculo.tipoVeiculo.id_tipo_veiculo === tipoDeVeiculo.id_tipo_veiculo;
             }).length)
         });
 
-        $scope.labels = graphObject.labels;
-        $scope.series = ['Carro'];
-        $scope.data = [graphObject.data];
+        mountGraph('chart-bar', 'veiculo', { labels, data, series: ['Quantidade de veiculos'] }, $scope);
 
+    });
+
+    PedidoService.list().then(function (data) {
+        var pedidos = data.data;
+        var mineriosNosPedidos = _.groupBy(pedidos, function (pedido) {
+            return pedido.minerio.nome;
+        });
+        var totalPorMinerios = _.map(mineriosNosPedidos, function (pedidos) {
+            pedidos.total = _.map(pedidos, function (pedido) {
+                return parseFloat(pedido.total);
+            });
+            return _.reduce(pedidos.total, function (sum, n) {
+                return sum + n;
+            }, 0);
+        });
+
+        mineriosNosPedidos = Object.getOwnPropertyNames(mineriosNosPedidos);
+        var labels = mineriosNosPedidos;
+        var data = totalPorMinerios;
+
+        mountGraph('chart-bar', 'minerio', { labels, data, series: ['Quantidade de minerios'] }, $scope);
+
+    })
+
+    PedidoService.list().then(function (data) {
+        var pedidos = data.data;
+        var clientesPorPedido = _.groupBy(pedidos, function (pedido) {
+            return pedido.cliente.nome;
+        });
+        console.log(clientesPorPedido);
+
+        var totalDeClientes = _.map(clientesPorPedido, function (pedidos) {
+            return pedidos.length;
+        });
+
+        clientesPorPedido = Object.getOwnPropertyNames(clientesPorPedido);
+        var labels = clientesPorPedido;
+        var data = totalDeClientes;
+
+        mountGraph('chart-bar', 'cliente', { labels, data, series: ['Quantidade de clientes'] }, $scope);
 
     })
 
 });
+
+
+function mountGraph(typeGraph, nameGraph, graphObject, scope) {
+    scope[nameGraph] = {};
+    scope[nameGraph]['typeGraph'] = typeGraph;
+    scope[nameGraph]['labels'] = graphObject.labels;
+    scope[nameGraph]['data'] = graphObject.data;
+    scope[nameGraph]['series'] = graphObject.series;
+    scope[nameGraph]['ready'] = true;
+}

@@ -9,10 +9,12 @@ function serialize(entity, iEntity) { // Serializar valores do form
 
 function resolvePromise(promise, callback) {
     promise.then(function (response) {
+        alert('Cadastrado com sucesso: ' + JSON.stringify(response.data.nome ? response.data.nome : response.data))
         callback();
     }).catch(function (error) {
-        console.log(error.data[0].msg_dev);
-        alert(JSON.stringify(error.data[0].msg_user));
+        if(!error.data[0]) alert("Problema ao Cadastrar, verifique os campos");
+        else alert(JSON.stringify(error.data[0].msg_user));
+        throw error;
     })
 }
 
