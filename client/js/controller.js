@@ -168,6 +168,14 @@ App.controller("VeiculosCtrl", function ($scope, VeiculoService, PassDataBeteewe
 
 App.controller("GraphCtrl", function ($scope, VeiculoService, PedidoService, $rootScope) {
     //Quantidade de Veiculo por tipo
+
+    //Setando o eixo y para iniciar com valor 0
+    $scope.options = {
+        scales: {
+            yAxes: [{ id: 'y-axis-1', ticks: { min: 0 } }]
+        }
+    }
+
     VeiculoService.list().then(function (data) {
         var veiculos = data.data;
         var tiposDeVeiculos = [];

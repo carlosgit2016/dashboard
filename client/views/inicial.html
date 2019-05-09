@@ -6,18 +6,18 @@
         </div>
         <div ng-if="veiculo.ready">
             <canvas class="chart chart-bar" chart-data="veiculo.data" chart-labels="veiculo.labels"
-                chart-series="veiculo.series" chart-options="options" chart-dataset-override="datasetOverride">
+                chart-series="veiculo.series" chart-options="options">
             </canvas>
         </div>
     </div>
 
     <div class="w-3/4 m-4 rounded overflow-hidden shadow-lg">
         <div class="container m-4 text-left">
-            <div class="font-bold text-base">Quantidade de minerio por tipo</div>
+            <div class="font-bold text-base">Total do valor acumulado de minerio</div>
         </div>
         <div ng-if="minerio.ready">
             <canvas class="chart chart-bar" chart-data="minerio.data" chart-labels="minerio.labels"
-                chart-series="minerio.series" chart-options="options" chart-dataset-override="datasetOverride">
+                chart-series="minerio.series" chart-options="options">
             </canvas>
         </div>
     </div>
@@ -28,7 +28,7 @@
         </div>
         <div ng-if="cliente.ready">
             <canvas class="chart chart-bar" chart-data="cliente.data" chart-labels="cliente.labels"
-                chart-series="cliente.series" chart-options="options" chart-dataset-override="datasetOverride">
+                chart-series="cliente.series" chart-options="options">
             </canvas>
         </div>
     </div>
