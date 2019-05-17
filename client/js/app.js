@@ -1,5 +1,5 @@
 var App = angular.module('App', ['ngRoute', 'chart.js','controllers','services','components']);
-
+//Test
 App.config(function ($routeProvider) {
     $routeProvider
         .when('/', {
